@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="ru-Ru">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Таблицы и прочие радости">
+        <meta name="twitter:description" content="Как понятно и красиво представить данные в виде таблицы">
+        <meta name="twitter:image" content="https://www.igorshtang.ru/assets/img/tw.png">
+        <meta name="description" content="Таблицы и прочие радости">
+        <meta property="og:description" content="Как понятно и красиво представить данные в виде таблицы">
+        <meta itemprop="name" content="Таблицы и прочие радости">
+        <meta itemprop="description" content="Таблицы и прочие радости">
+        <meta property="fb:admins" content="https://www.igorshtang.ru/course/tables">
+        <link rel="image_src" href="https://www.igorshtang.ru/assets/img/fb.png">
+        <meta property="og:image" content="images/fb.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="vk:image" content="https://www.igorshtang.ru/assets/img/vk.png">
+        
+            <title>Таблицы и прочие радости</title>
+        
+
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+@font-face {
+  font-family: Graphik;
+  src: url(fonts/Graphik-Regular-Web.eot);
+  src: url(fonts/Graphik-Regular-Web.eot#iefix) format("embedded-opentype"), url(fonts/Graphik-Regular-Web.woff2) format("woff2"), url(fonts/Graphik-Regular-Web.woff) format("woff"), url(fonts/Graphik-Regular-Web.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Graphik;
+  src: url(fonts/Graphik-Semibold-Web.eot);
+  src: url(fonts/Graphik-Semibold-Web.eot#iefix) format("embedded-opentype"), url(fonts/Graphik-Semibold-Web.woff2) format("woff2"), url(fonts/Graphik-Semibold-Web.woff) format("woff"),
+    url(fonts/Graphik-Semibold-Web.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@media print {
+    html, body {
+       display: none;
+    }
+}
+
+* {
+  font-family: "Spectral", serif;
+  transition: 0.1s ease-in-out;
+}
+
+img,
+svg {
+  vertical-align: bottom;
+}
+@media (prefers-color-scheme: dark) {
+  .inverted {
+    filter: invert() contrast(83%);
+  }
+  .bright {
+    filter: contrast(87.5%);
+  }
+  .inverted-n-greyscaled {
+    filter: invert() contrast(83%) grayscale(100%);
+  }
+  .inverted-n-hued {
+    filter: invert() contrast(83%) hue-rotate(180deg);
+  }
+}
+
+.margs::-webkit-scrollbar {
+    display: none;
+    }
+
+@media screen and (max-width: 600px) {
+  .margs {
+    padding: 0 16px 80px 32px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5) var(--onesix), #000 var(--threetwo), #000 calc(100% - var(--threetwo)), rgba(0, 0, 0, 0.85) calc(100% - var(--onesix)), transparent);
+    mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.5) var(--onesix), #000 var(--threetwo), #000 calc(100% - var(--threetwo)), rgba(0, 0, 0, 0.85) calc(100% - var(--onesix)), transparent);
+  }
+}
+@media screen and (min-width: 601px) {
+  .margs {
+    padding: 0 40px 80px 80px;
+    overflow-x: scroll;
+    -webkit-mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.25) var(--onesix), #000 var(--threetwo), #000 calc(100% - var(--threetwo)), rgba(0, 0, 0, 0.25) calc(100% - var(--onesix)), transparent);
+    mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.25) var(--onesix), #000 var(--threetwo), #000 calc(100% - var(--threetwo)), rgba(0, 0, 0, 0.25) calc(100% - var(--onesix)), transparent);
+  }
+}
+@media screen and (max-width: 600px) {
+  .pads {
+    margin-right: 16px;
+  }
+}
+@media screen and (min-width: 601px) {
+  .pads {
+    padding-right: 40px;
+  }
+}
+.wrap-medium {
+  max-width: 800px;
+}
+
+.wrap-large {
+  max-width: 1280px;
+}
+.img-adaptive {
+  width: 100%;
+}
+figcaption {
+  margin-top: var(--twoone);
+  margin-left: 0;
+  font-family: "Spectral", serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.3px;
+  color: var(--textmain);
+}
+figcaption > a {
+  font-family: "Spectral", serif !important;
+}
+.base-layer,
+.img-layered-wrap {
+  position: relative;
+}
+
+/* на тёмной теме даёт более тёмную подложку, попробуем убрать и посмотреть что будет */
+/*
+.base-layer{
+    background-color:var(--bgtable)
+}
+*/
+
+@media screen and (max-width: 600px) {
+  .upper-layer {
+    position: absolute;
+    opacity: 0;
+    background: none;
+    top: 0;
+    left: 0;
+  }
+}
+@media screen and (min-width: 601px) {
+  .upper-layer {
+    position: absolute;
+    opacity: 0;
+    background: none;
+    top: 0;
+    left: 0;
+  }
+}
+.grid-layer {
+  opacity: 1;
+}
+.grid-layer,
+.grid-layer:hover {
+  transition: opacity 0.1s ease-in-out;
+}
+.grid-layer:hover {
+  opacity: 0;
+}
+.hided:hover,
+.show {
+  opacity: 1;
+}
+.hide,
+.show {
+  transition: opacity 0.1s ease-in-out;
+}
+.hide {
+  opacity: 0;
+}
+@media (prefers-color-scheme: dark) {
+  .aviasales-bg {
+    background-color: #1f3d51;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .white-bg {
+    background-color: #fff;
+  }
+}
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+[hidden],
+template {
+  display: none;
+}
+a {
+  background: 0 0;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: 700;
+}
+dfn {
+  font-style: italic;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+img {
+  border: 0;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+figure {
+  margin: 1em 40px;
+}
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+pre {
+  overflow: auto;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+input {
+  line-height: normal;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+legend {
+  border: 0;
+  padding: 0;
+}
+textarea {
+  overflow: auto;
+}
+optgroup {
+  font-weight: 700;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  padding: 0;
+}
+:root {
+  color-scheme: light dark;
+  --bgbody: #373737;
+  --bgarticle: #fff;
+  --bgcut: 255, 255, 255;
+  --bgarticleblur: hsla(0, 0%, 100%, 0.9);
+  --bgtable: #fff;
+  --bgbytheway: rgba(0, 0, 0, 0.05);
+  --bgpatchwork: #efede2;
+  --bghover: rgba(224, 0, 0, 0.3);
+  --bgselected: rgba(224, 0, 0, 0.3);
+  --bglight: rgba(0, 0, 0, 0.07);
+  --brdfooter: #a3a3a3;
+  --textfooter: #fff;
+  --textfootergrey: hsla(0, 0%, 100%, 0.5);
+  --border: rgba(0, 0, 0, 0.1);
+  --red: #e00000;
+  --redhover: #ad0000;
+  --accentbg: rgba(224, 0, 0, 0.3);
+  --textmain: #222;
+  --textgrey: rgba(0, 0, 0, 0.4);
+  --textcapture: rgba(0, 0, 0, 0.6);
+  --examplegood: #3ec000;
+  --examplebad: #e00000;
+  --exampleugly: #ffb800;
+  --yellow: #fe0;
+  --orange: #f80;
+  --bgpractice: #eadcb7;
+  --eight: 8px;
+  --onesix: 16px;
+  --twoone: 21px;
+  --twoeight: 28px;
+  --threetwo: 32px;
+  --fivesix: 56px;
+  --fourty: 40px;
+  --brdrmain: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bgbody: #202124;
+    --bgarticle: #161616;
+    --bgcut: 22, 22, 22;
+    --bgarticleblur: rgba(22, 22, 22, 0.8);
+    --bgtable: #161616;
+    --bgbytheway: rgba(250, 250, 250, 0.05);
+    --bgpatchwork: hsla(50, 27%, 91%, 0.06);
+    --bghover: rgba(224, 0, 0, 0.3);
+    --bgpractice: #2f2b20;
+    --bgselected: rgba(224, 0, 0, 0.3);
+    --bglight: hsla(0, 0%, 100%, 0.06);
+    --border: hsla(0, 0%, 100%, 0.1);
+    --red: #c00;
+    --accentbg: rgba(245, 196, 0, 0.15);
+    --redhover: #ff1a1a;
+    --textmain: #bfbfbf;
+    --textgrey: hsla(0, 0%, 100%, 0.25);
+    --textcapture: hsla(0, 0%, 100%, 0.3);
+    --examplegood: #3ec000;
+    --examplebad: #b30000;
+    --exampleugly: #ffb800;
+    --yellow: #fe0;
+    --orange: #f80;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a.link {
+  font-family: "Spectral", serif !important;
+}
+
+
+@media screen and (max-width: 340px) {
+    span.factoid {
+    font-size: 90px;
+    line-height: 90px;
+    font-family: "Graphik", sans-serif;
+    padding-top: 8px;
+    display: block;
+    margin-left: -6px;
+    letter-spacing: -2px;
+  }
+}
+@media screen and (min-width: 341px) {
+    span.factoid {
+    font-size: 103px;
+    line-height: 102px;
+    font-family: "Graphik", sans-serif;
+    padding-top: 8px;
+    display: block;
+    margin-left: -6px;
+    letter-spacing: -2px;
+  }
+}
+
+
+span.aside-header {
+  font-size: 19px !important;
+  line-height: 32px;
+  display: inline;
+  font-family: "Graphik", sans-serif;
+  font-weight: 600;
+  font-size: 88%;
+  letter-spacing: 0;
+}
+span.factoid-description {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  display: block;
+  padding-top: 2px;
+  padding-bottom: var(--onesix);
+}
+div.right {
+  text-align: right;
+}
+
+/* Footer links */
+.footer-links {
+  display: -ms-grid;
+  display: grid;
+  gap: 0 0;
+  list-style: none;
+  counter-reset: item;
+  grid-gap: 1px;
+  padding: 1px;
+  background-color: var(--brdfooter);
+  border-radius: 13px;
+  box-sizing: border-box;
+}
+.footer-links .footer-item {
+  color: var(--textfooter);
+  counter-increment: item;
+  font-size: 19px;
+  line-height: 26px;
+  height: 200px;
+  padding: var(--onesix);
+  background-color: var(--bgbody);
+  box-sizing: border-box;
+  font-family: Graphik, sans-serif;
+  font-weight: 500;
+}
+.footer-links .footer-item:first-child {
+  border-radius: 13px 0 0 0;
+}
+.footer-links .footer-item:nth-child(5) {
+  border-radius: 0 13px 0 0;
+}
+.footer-links .footer-item:nth-child(11) {
+  border-radius: 0 0 0 13px;
+}
+.footer-links .footer-item:nth-child(15) {
+  border-radius: 0 0 13px 0;
+}
+.footer-links .footer-item:before {
+  display: block;
+  content: counter(item);
+  color: var(--textfooter);
+  font-size: var(--twoone);
+  font-family: Graphik, sans-serif;
+  line-height: var(--twoeight);
+}
+.footer-item:last-child:before {
+  opacity: 0;
+}
+.footer-links .footer-item:hover {
+  transition: 0.1s ease-in-out;
+  color: var(--textfooter);
+  background-color: #515151;
+}
+.footer-links .footer-item.is-active,
+.footer-links .footer-item:active {
+  transition: 0.3s ease-in-out;
+  background-color: #454545;
+}
+.footer-links .footer-item.inprogress,
+.footer-links .footer-item.inprogress:before {
+  color: var(--textfootergrey);
+}
+
+@media screen and (max-width: 600px) {
+  .footer-links :last-child {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .footer-links {
+    margin-left: -1px;
+    margin-right: -1px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .footer-links,
+  .footer-links .footer-item:first-child,
+  .footer-links .footer-item:nth-child(5),
+  .footer-links .footer-item:nth-child(11),
+  .footer-links .footer-item:nth-child(15) {
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer-links {
+      -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 950px) {
+  .footer-links {
+    -ms-grid-columns: (1fr) [3];
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 951px) {
+  .footer-links {
+    -ms-grid-columns: (1fr) [5];
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+body {
+  background-color: var(--bgbody);
+}
+h1,
+h2,
+h3,
+li,
+p,
+ul {
+  color: var(--textmain);
+}
+p h1 h2 h3 ul li div section:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+div.article {
+  margin: 40px auto 0;
+  padding-bottom: 60px;
+  max-width: 1280px;
+  background-color: var(--bgarticle);
+  border-radius: var(--brdrmain);
+  overflow: hidden;
+}
+div.article a {
+  font-family: Graphik, sans-serif;
+}
+h2.article,
+h2.practice {
+  font-size: var(--threetwo);
+  margin-left: -1px;
+}
+@media screen and (max-width: 600px) {
+  h2.article,
+  h2.practice {
+    padding-top: var(--threetwo);
+    margin-bottom: var(--onesix);
+    padding-left: var(--onesix);
+    padding-right: var(--onesix);
+  }
+}
+@media screen and (min-width: 601px) {
+  h2.article {
+    padding-top: var(--threetwo);
+  }
+}
+@media screen and (min-width: 601px) {
+  h2.article,
+  h2.practice {
+    margin-bottom: var(--onesix);
+    padding-left: var(--fourty);
+    padding-right: var(--fourty);
+  }
+  h2.practice {
+    padding-top: var(--fourty);
+  }
+}
+@media screen and (max-width: 600px) {
+  .wrap,
+  div.table,
+  p {
+    padding-left: var(--onesix);
+    padding-right: var(--onesix);
+  }
+  .img-table {
+    margin-left: var(--onesix);
+    margin-right: var(--onesix);
+  }
+}
+@media screen and (min-width: 601px) {
+  .wrap,
+  div.table,
+  p {
+    padding-left: var(--fourty);
+    padding-right: var(--fourty);
+  }
+  .img-table {
+    margin-left: var(--fourty);
+    margin-right: var(--fourty);
+  }
+}
+@media screen and (min-width: 1025px) {
+  .sticky {
+    background-color: var(--bgarticleblur);
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+    top: calc(var(--twoone) * -1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 666;
+    cursor: pointer;
+  }
+}
+.unsticky {
+  position: static;
+}
+p {
+  max-width: 800px;
+}
+.text-highlighter,
+p,
+summary,
+ul {
+  font-size: var(--twoone);
+  line-height: var(--threetwo);
+  margin-top: 0;
+  margin-bottom: var(--threetwo);
+  letter-spacing: -0.2px;
+}
+@media screen and (max-width: 600px) {
+  .text-highlighter,
+  i,
+  p,
+  ul {
+    hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-wrap: break-word;
+  }
+}
+span.footer-tag {
+  font-family: "Graphik", sans-serif;
+  font-weight: 500;
+  font-size: var(--onesix);
+  line-height: var(--onesix);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #e0e0e0;
+  bottom: 6px;
+  position: relative;
+}
+h2 {
+  font-family: Graphik;
+  font-weight: 600;
+}
+@media screen and (max-width: 600px) {
+  ul.steps {
+    max-width: 758px;
+    -webkit-padding-start: var(--threetwo);
+    padding-inline-start: var(--threetwo);
+    list-style: none;
+    margin-left: 1px;
+    margin-right: var(--fourty);
+    margin-top: calc(var(--onesix) * -1);
+    margin-bottom: 48px;
+  }
+  li.steps {
+    margin-bottom: var(--onesix);
+    text-indent: -6px;
+  }
+  ul.steps li:before {
+    content: "·";
+    position: relative;
+    left: -8px;
+    color: var(--textmain);
+  }
+}
+@media screen and (min-width: 601px) {
+  ul.steps {
+    max-width: 758px;
+    -webkit-padding-start: var(--threetwo);
+    padding-inline-start: var(--threetwo);
+    list-style: none;
+    margin-left: 48px;
+    margin-right: var(--fourty);
+    margin-top: calc(var(--onesix) * -1);
+    margin-bottom: calc(var(--threetwo) * 2);
+  }
+  li.steps {
+    margin-bottom: var(--onesix);
+    text-indent: calc(var(--twoone) * -1);
+  }
+  ul.steps li:before {
+    content: "—";
+    position: relative;
+    left: calc(var(--onesix) * -1);
+    color: var(--textmain);
+  }
+}
+.grey {
+  color: var(--textgrey);
+}
+span.text-highlighter {
+  word-break: normal;
+  font-family: "Graphik", sans-serif;
+  font-size: 19.1px;
+  font-weight: 600;
+}
+@media screen and (max-width: 600px) {
+  div.bytheway {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: var(--fivesix);
+    border-radius: 0;
+    background-color: var(--bgbytheway);
+    padding-bottom: var(--fourty);
+  }
+}
+@media screen and (min-width: 601px) {
+  div.bytheway {
+    margin-left: var(--fourty);
+    margin-right: var(--fourty);
+    margin-bottom: var(--fivesix);
+    border-radius: 6px;
+    background-color: var(--bgbytheway);
+    padding-bottom: var(--fourty);
+  }
+}
+span.podbor {
+  display: inline;
+  font-family: "Graphik", sans-serif;
+  font-weight: 600;
+  font-size: 88%;
+  letter-spacing: 0;
+}
+p.rule {
+  font-style: italic;
+  padding-bottom: var(--fivesix);
+  max-width: 650px;
+  color: var(--textmain);
+}
+@media screen and (max-width: 600px) {
+  p.rule {
+    font-size: 28px;
+    line-height: 38px;
+    margin-left: var(--onesix);
+    margin-right: var(--onesix);
+    hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-wrap: break-word;
+  }
+}
+@media screen and (min-width: 601px) {
+  p.rule {
+    font-size: 36px;
+    line-height: 44px;
+    margin-left: var(--fourty);
+    margin-right: var(--fourty);
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+}
+p.subheader {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+a {
+  color: var(--red);
+  text-decoration: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+a:hover {
+  color: var(--redhover);
+}
+@media screen and (max-width: 600px) {
+  div.table {
+    margin-left: var(--onesix);
+    margin-right: var(--onesix);
+    margin-bottom: var(--fivesix);
+  }
+}
+@media screen and (min-width: 601px) {
+  div.table {
+    margin-left: var(--fourty);
+    margin-right: var(--fourty);
+    margin-bottom: var(--fivesix);
+  }
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+div.table-item {
+  font-size: var(--twoone);
+}
+div.table-header,
+div.table-item {
+  line-height: var(--twoeight);
+  color: var(--textmain);
+}
+div.table-header {
+  font-size: var(--onesix);
+}
+div.table-total {
+  border-top: 1px solid var(--border);
+}
+footer {
+  margin: 0 auto;
+  max-width: 1280px;
+  background-color: var(--brdfooter);
+}
+ol.footer {
+  display: -ms-grid;
+  display: grid;
+  gap: 0 0;
+  list-style: none;
+  counter-reset: item;
+  grid-gap: 1px;
+  padding: 0;
+}
+ol.footer li {
+  font-family: "Graphik", sans-serif;
+  font-weight: 500;
+  color: var(--textfooter);
+  counter-increment: item;
+  font-size: 19px;
+  line-height: 26px;
+  height: 200px;
+  padding: var(--onesix);
+  background-color: var(--bgbody);
+  box-sizing: border-box;
+  border: 0 solid var(--brdfooter);
+}
+ol.footer a > li:hover {
+  transition: 0.1s ease-in-out;
+  color: var(--textfooter);
+  background-color: #515151;
+}
+ol.footer li:before {
+  content: counter(item);
+  color: var(--textfooter);
+  display: block;
+  font-size: var(--twoone);
+  line-height: var(--twoeight);
+}
+ol.footer li.inprogress,
+ol.footer li.inprogress:before {
+  cursor: not-allowed;
+  color: var(--textfootergrey);
+}
+ol.footer a > li:active {
+  transition: 0.3s ease-in-out;
+}
+ol.footer a > li:active,
+ol.footer li.youarehere {
+  background-color: #454545;
+}
+@media screen and (max-width: 600px) {
+  footer {
+    overflow: hidden;
+  }
+  ol.footer {
+    border-top: 1px solid var(--brdfooter);
+    border-bottom: 1px solid var(--brdfooter);
+  }
+  ol.footer li.blank {
+    display: none;
+  }
+}
+@media screen and (min-width: 601px) and (max-width: 1280px) {
+  footer {
+    overflow: hidden;
+  }
+  ol.footer {
+    border-top: 1px solid var(--brdfooter);
+    border-bottom: 1px solid var(--brdfooter);
+  }
+  ol.footer li.blank:before {
+    color: var(--bgbody);
+  }
+}
+@media screen and (min-width: 1281px) {
+  footer {
+    border-radius: 15px;
+  }
+  ol.footer {
+    border: 1px solid var(--brdfooter);
+    border-radius: 14px;
+  }
+  ol.footer li.lt {
+    border-radius: 13px 0 0 0;
+  }
+  ol.footer li.lb {
+    border-radius: 0 0 0 13px;
+  }
+  ol.footer li.rt {
+    border-radius: 0 13px 0 0;
+  }
+  ol.footer li.rb {
+    border-radius: 0 0 13px 0;
+  }
+  ol.footer li.blank:before {
+    color: var(--bgbody);
+  }
+}
+@media screen and (max-width: 600px) {
+  ol.footer {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  ol.footer li.blank {
+    display: none;
+  }
+}
+@media screen and (min-width: 601px) and (max-width: 950px) {
+  ol.footer {
+    -ms-grid-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+@media screen and (min-width: 951px) {
+  ol.footer {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 600px) {
+  .mobile-copy {
+    display: inline-block;
+    text-indent: 0;
+  }
+  .desktop-copy {
+    display: none;
+  }
+}
+@media screen and (min-width: 601px) {
+  .mobile-copy {
+    display: none;
+  }
+  .desktop-copy {
+    display: inline-block;
+    text-indent: 0;
+  }
+}
+@media (prefers-color-scheme: light) {
+  .darktheme-copy {
+    display: none;
+  }
+  .lighttheme-copy {
+    display: inline-block;
+    text-indent: 0;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .darktheme-copy {
+    display: inline-block;
+    text-indent: 0;
+  }
+  .lighttheme-copy {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .img-mobile {
+    display: block;
+  }
+  .img-desktop {
+    display: none;
+  }
+}
+@media screen and (min-width: 769px) {
+  .img-mobile {
+    display: none;
+  }
+  .img-desktop {
+    display: block;
+  }
+}
+.hover-link {
+  color: var(--red);
+  text-decoration: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  font-style: italic;
+}
+.hover-link:hover {
+  color: var(--redhover);
+  background-color: var(--accentbg);
+  padding: 0 3px;
+  margin: 0 -3px;
+}
+.hover-direction-top {
+  cursor: n-resize;
+}
+.hover-direction-down {
+  cursor: s-resize;
+}
+.hover-direction-top-down {
+  cursor: ns-resize;
+}
+p.theme-break {
+  text-align: center;
+  font-size: var(--threetwo);
+  color: var(--textmain);
+  line-height: 1;
+  margin-bottom: var(--threetwo);
+  margin-top: var(--threetwo);
+  cursor: crosshair;
+}
+@media screen and (max-width: 1165px) {
+  div.aside {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+  p.aside {
+    font-size: var(--onesix);
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color: var(--textmain);
+  }
+  p.aside,
+  p.aside > a {
+    font-family: Graphik, sans-serif;
+  }
+}
+@media screen and (min-width: 1000px) {
+  div.aside {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 880px minmax(100px, 350px);
+    grid-template-columns: 880px minmax(100px, 350px);
+    grid-gap: 0;
+  }
+  p.aside {
+    margin: 5px 20px 0 16px;
+  }
+  p.aside,
+  p.aside-list {
+    padding: 0;
+    font-family: "Graphik", sans-serif;
+    font-size: var(--onesix);
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color: var(--textmain);
+  }
+  p.aside-list {
+    margin: -10px 34px 0 0;
+  }
+  p.aside > a {
+    font-family: Graphik, sans-serif;
+  }
+}
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+summary {
+  color: var(--red);
+  text-decoration: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  cursor: pointer;
+  outline: none;
+}
+summary:hover {
+  color: var(--redhover);
+  outline: none;
+}
+details[open] summary ~ * {
+  -webkit-animation: sweep 0.5s ease-in-out;
+  animation: sweep 0.5s ease-in-out;
+}
+@-webkit-keyframes sweep {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes sweep {
+  0% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 768px) {
+  section.practice,
+  section.practice-horizontal,
+  section.practice-vertical {
+    border-radius: 0 0 var(--brdrmain) var(--brdrmain);
+    background-color: var(--bgpractice);
+    padding-bottom: 60px !important;
+    margin-bottom: -60px !important;
+    margin-top: 120px;
+  }
+}
+@media screen and (min-width: 769px) {
+  section.practice-vertical {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+  section.practice-horizontal,
+  section.practice-vertical {
+    border-radius: 0 0 var(--brdrmain) var(--brdrmain);
+    display: -ms-grid;
+    display: grid;
+    background-color: var(--bgpractice);
+    padding-bottom: 60px !important;
+    margin-bottom: -60px !important;
+    margin-top: 120px;
+  }
+  section.practice-horizontal {
+    -ms-grid-columns: 0.7fr 1.3fr;
+    grid-template-columns: 0.7fr 1.3fr;
+  }
+  div.practice-img {
+    padding-top: 44px;
+  }
+}
+section.practice p {
+  font-family: "Graphik", sans-serif;
+  font-size: 19px;
+  line-height: 32px;
+}
+section.next {
+  margin: calc(var(--fourty) * 2) auto 70px auto;
+  max-width: 1280px;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  div.next-link {
+    font-size: 11.5vw;
+    line-height: 1;
+    font-family: "Spectral", serif;
+    font-weight: 400;
+    color: #e0e0e0;
+    padding: 0 30px;
+    background-color: var(--bgbody);
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto;
+    letter-spacing: -1px;
+  }
+}
+@media screen and (min-width: 601px) {
+  div.next-link {
+    font-size: 64px;
+    line-height: 1;
+    font-family: "Spectral", serif;
+    font-weight: 400;
+    color: #e0e0e0;
+    padding: 0 30px;
+    background-color: var(--bgbody);
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto;
+    letter-spacing: -1px;
+  }
+}
+div.arrow {
+  width: 100%;
+  height: 33px;
+  background-repeat: no-repeat;
+  position: relative;
+  top: -45px;
+  left: 0;
+  z-index: -1;
+}
+div.arrow-next {
+  background-image: url(fonts/arrow.svg);
+  background-position: 100%;
+}
+div.arrow-prev {
+  background-image: url(fonts/arrow-prev.svg);
+  background-position: 0;
+}
+section.next:hover .arrow {
+  -webkit-animation: arrowhover 0.5s ease-in-out infinite;
+  animation: arrowhover 0.5s ease-in-out infinite;
+}
+@media screen and (max-width: 1300px) {
+  @-webkit-keyframes arrowhover {
+    0% {
+      -webkit-transform: scale(1);
+    }
+    33% {
+      -webkit-transform: scale(0.98);
+    }
+    67% {
+      -webkit-transform: scale(0.98);
+    }
+    to {
+      -webkit-transform: scale(1);
+    }
+  }
+  @keyframes arrowhover {
+    0% {
+      -webkit-transform: scale(1);
+    }
+    33% {
+      -webkit-transform: scale(0.98);
+    }
+    67% {
+      -webkit-transform: scale(0.98);
+    }
+    to {
+      -webkit-transform: scale(1);
+    }
+  }
+}
+@media screen and (min-width: 1301px) {
+  @-webkit-keyframes arrowhover {
+    0% {
+      -webkit-transform: scale(1);
+    }
+    33% {
+      -webkit-transform: scale(1.02);
+    }
+    67% {
+      -webkit-transform: scale(1.02);
+    }
+    to {
+      -webkit-transform: scale(1);
+    }
+  }
+  @keyframes arrowhover {
+    0% {
+      -webkit-transform: scale(1);
+    }
+    33% {
+      -webkit-transform: scale(1.02);
+    }
+    67% {
+      -webkit-transform: scale(1.02);
+    }
+    to {
+      -webkit-transform: scale(1);
+    }
+  }
+}
+section.next:hover div.next-link {
+  color: #fff;
+  transition: all 0.1s ease;
+}
+section.copyright {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+@media screen and (max-width: 1009px) {
+  section.copyright ul {
+    padding: 0;
+    margin: 0 0 0 var(--onesix);
+    display: block;
+  }
+}
+@media screen and (min-width: 1010px) {
+  section.copyright ul {
+    padding: 0;
+    margin: 0 0 0 var(--onesix);
+    display: flex;
+  }
+}
+@media screen and (max-width: 1009px) {
+  section.copyright a,
+  section.copyright li {
+    font-family: "Graphik", sans-serif;
+    font-size: var(--onesix);
+    line-height: var(--twoone);
+    color: #757575;
+    margin-bottom: var(--onesix);
+    list-style-type: none;
+    padding: 0 var(--twoone) 0 0;
+    letter-spacing: 0;
+  }
+}
+@media screen and (min-width: 1010px) {
+  section.copyright a,
+  section.copyright li {
+    font-family: "Graphik", sans-serif;
+    font-size: var(--onesix);
+    line-height: var(--twoone);
+    color: #757575;
+    margin-bottom: var(--threetwo);
+    list-style-type: none;
+    padding: 0 var(--twoone) 0 0;
+    letter-spacing: 0;
+  }
+}
+section.copyright a {
+  padding: 0;
+}
+section.copyright a:hover {
+  color: var(--red);
+  transition: all 0.1s ease;
+}
+.small-pads {
+  padding: var(--twoone);
+}
+
+/* HEADER */
+
+h1 {
+  font-family: "Spectral", serif;
+  font-weight: 400;
+  margin-left: -3px;
+  padding: 0 var(--fourty) 0 0;
+}
+
+span.header-tag {
+  font-weight: 500;
+  font-size: var(--onesix);
+  line-height: var(--onesix);
+  letter-spacing: 3.6px;
+  text-transform: uppercase;
+  color: var(--textmain);
+  font-family: "Graphik", sans-serif;
+  margin-bottom: 16px;
+  display: block;
+}
+
+span.header-tag:hover {
+  letter-spacing: 6.6px;
+}
+
+.header-img {
+  height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    margin-left: var(--onesix);
+    margin-right: var(--onesix);
+  }
+}
+
+@media screen and (min-width: 601px) {
+  header {
+    margin-left: var(--fourty);
+    margin-right: var(--fourty);
+  }
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 414px) {
+  h1 {
+    margin: 0 0 12px 0;
+    hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-wrap: break-word;
+    font-size: var(--fourty);
+    line-height: 1;
+    letter-spacing: -1px;
+    padding: 0;
+  }
+  
+  .header-picture-promo {
+    height: 100% !important;
+  }
+  
+  div.header-picture {
+    text-align: left;
+    height: 240px;
+    grid-row: 2/1;
+    padding-bottom: var(--threetwo);
+  }
+  header {
+    padding-top: var(--fourty);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: calc(var(--threetwo) * 5);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .header-img-promo {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+
+  header p {
+    font-family: "Graphik", sans-serif;
+    font-size: 19px;
+    line-height: var(--threetwo);
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0;
+    padding: 0 16px 36px 0px;
+  }
+
+}
+
+
+
+
+
+
+@media screen and (min-width: 415px) and (max-width: 699px) {
+  h1 {
+    margin: 0 0 12px 0;
+    hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    word-wrap: break-word;
+    font-size: var(--fourty);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  div.header-picture {
+    text-align: left;
+    height: 240px;
+    grid-row: 2/1;
+    padding-bottom: var(--threetwo);
+  }
+  header {
+    padding-top: var(--fourty);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: calc(var(--threetwo) * 5);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  header p {
+    font-family: "Graphik", sans-serif;
+    font-size: 19px;
+    line-height: var(--threetwo);
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0;
+    padding: 0 16px 36px 0px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  h1 {
+    padding-bottom: calc(var(--threetwo) * 3);
+    font-size: var(--fourty);
+    line-height: 1;
+    letter-spacing: -1px;
+    margin: 0;
+    left: -1px;
+  }
+  div.header-picture {
+    text-align: center;
+    height: 240px;
+  }
+  div.header-text {
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  header {
+    padding-top: var(--fourty);
+    padding-bottom: var(--fourty);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: calc(var(--threetwo) * 5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  header p {
+    font-family: "Graphik", sans-serif;
+    font-size: 19px;
+    line-height: var(--threetwo);
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0;
+    position: absolute;
+    bottom: -4px;
+    padding: 0 16px 0 0;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  h1 {
+    font-size: 64px;
+    line-height: 1;
+    padding-bottom: calc(var(--threetwo) * 3);
+    letter-spacing: -1px;
+    margin: 0;
+    position: relative;
+    top: -3px;
+    left: -1px;
+  }
+  div.header-picture {
+    text-align: center;
+    height: 346px;
+  }
+  div.header-text {
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  header p {
+    font-family: "Graphik", sans-serif;
+    font-size: 19px;
+    line-height: var(--threetwo);
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0;
+    position: absolute;
+    bottom: -4px;
+    padding: 0 16px 0 0;
+  }
+}
+
+.cut-gradient {
+  background: linear-gradient(0deg, rgba(var(--bgcut), 1) 12%, rgba(var(--bgcut), 0) 100%);
+  height: 300px;
+}
+
+.cut {
+  position: relative;
+  top: -300px;
+  margin-bottom: -300px;
+}
+
+@media screen and (max-width: 600px) {
+  .cut {
+  margin-bottom: -415px;
+}
+}
+        </style>
+        
+    <style>
+        .border-desktop {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+.border-mobile {
+    border-radius: 0px;
+}
+
+span.factoid-description {
+    padding-top: 12px;
+    color: var(--textmain);
+}
+
+
+@media screen and (min-width: 1280px){
+  .tiles {
+    display: grid;
+    grid-template-columns: 800px 1fr;
+    grid-column-gap: 56px;
+    margin-top: 44px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+  }
+  .column-big { grid-area: 1 / 1 / 2 / 2; }
+  .column-small { grid-area: 1 / 2 / 2 / 3; }
+  .mobile-content {display: none;}
+}
+
+@media screen and (min-width: 620px) and (max-width: 1279px){
+    .tiles {
+        display: grid;
+        grid-template-columns: 2.33fr 1fr;
+        grid-column-gap: 56px;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 80px;
+    }
+    .column-big { grid-area: 1 / 1 / 2 / 2; }
+    .column-small { grid-area: 1 / 2 / 2 / 3; }
+    .mobile-content {display: none;}
+}
+
+@media screen and (max-width: 619px){
+  .tiles {
+    margin-left: 17px;
+    margin-right: 17px;
+  }
+  .column-big {display: none;}
+  .desktop-content {display: none;}
+  .mobile-content {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    margin-left: -17px;
+    margin-right: -17px;
+    padding-left: 17px;
+    padding-right: 17px;
+    grid-column-gap: 17px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .factoid-mobile-corrected {
+    margin-top: -7px !important;
+  }
+}
+
+.tiles-reverse {
+    grid-auto-flow: dense;
+    direction: rtl;
+}
+
+.left {
+    direction: ltr;
+}
+
+@media screen and (min-width: 601px) and (max-width: 914px){
+    .extra-content {
+        display: none !important;
+    }
+}
+
+.mobile-content::-webkit-scrollbar { 
+    display: none;
+}
+
+.tiles-mobile-scroll-img {
+    width: 85vw;
+}
+
+
+span.factoid {
+    font-size: 103px;
+    line-height: 1;
+    font-family: 'Graphik',sans-serif;
+    padding-top: 8px;
+    display: block;
+    margin-top: 16px;
+    margin-left: -3px;
+    margin-bottom: 0px;
+    letter-spacing: -5px;
+    color: var(--textmain);
+}
+
+span.aside-header {
+    font-size: 19px!important;
+    line-height: 26px;
+    color: var(--textmain);
+}
+
+.saturate {
+    filter: saturate(1.25);
+    border-radius: 16px;
+}
+
+
+
+
+
+
+
+/* old */
+
+
+
+
+@media screen and (max-width: 999px) {
+  .factoids {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  }
+}
+
+.oglavlenie-row {
+  border-top: 1px solid var(--border);
+  display: -ms-grid;
+  display: grid;
+  padding-top: var(--twoone);
+  padding-bottom: var(--threetwo);
+}
+
+.oglavlenie-row:last-child {
+  border-bottom: 1px solid var(--border);
+}
+.oglavlenie-item {
+  font-family: Graphik, sans-serif !important;
+  font-size: 19px;
+  line-height: 30px;
+  color: var(--textmain);
+}
+@media screen and (max-width: 600px) {
+  .oglavlenie-wrap {
+    margin-left: 18px;
+    margin-right: 18px;
+    padding-bottom: var(--twoone);
+  }
+  .oglavlenie-row {
+    -ms-grid-columns: 1fr 12px;
+    grid-template-columns: 1fr 12px;
+  }
+  .oglavlenie-item-2,
+  .oglavlenie-item-3 {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1/3;
+  }
+  .oglavlenie-item-4 {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2/3;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    grid-row: 1/2;
+  }
+  .oglavlenie-item-2 {
+    padding-bottom: var(--onesix);
+  }
+}
+@media screen and (min-width: 601px) {
+  .oglavlenie-wrap {
+    margin-left: var(--fourty);
+    margin-right: var(--fourty);
+    max-width: 800px;
+    padding-bottom: var(--twoone);
+  }
+  .oglavlenie-row {
+    -ms-grid-columns: 40px 180px 1fr 12px;
+    grid-template-columns: 40px 180px 1fr 12px;
+  }
+  .oglavlenie-item-3 {
+    padding-right: var(--twoone);
+  }
+}
+.practice-item-yes {
+  margin-top: 10px;
+}
+.practice-item-yes,
+.practice-item-yes-inline {
+  background-color: var(--textmain);
+  position: relative;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+.practice-item-yes-inline {
+  top: 1px;
+  display: inline-block;
+}
+.soon {
+  opacity: 0.5;
+}
+.soon > .practice-item-yes {
+  opacity: 0.8;
+}
+.practice-item-no {
+  height: 33px;
+}
+.price-row {
+  border-top: 1px solid var(--border);
+  display: -ms-grid;
+  display: grid;
+  padding-top: var(--twoone);
+  padding-bottom: var(--threetwo);
+}
+.price-row:last-child {
+  border-bottom: 1px solid var(--border);
+}
+.price-item {
+  font-family: "Spectral", serif;
+  font-size: var(--twoone);
+  line-height: var(--threetwo);
+  margin-top: 0;
+  margin-bottom: var(--threetwo);
+  color: var(--textmain);
+}
+
+.round-button {
+  border: 0;
+  padding: 0 0 0 3px;
+  margin-top: 1px;
+  line-height: 5.3;
+  -webkit-appearance: none;
+  font-family: "Graphik", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+@media screen and (max-width: 600px) {
+  .price-wrap {
+    margin-left: 18px;
+    margin-right: 18px;
+    padding-bottom: var(--twoone);
+  }
+  .price-row {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+  .price-item-2 {
+    padding-bottom: var(--onesix);
+  }
+  .price-header {
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 29px;
+  }
+  .price-amount,
+  .price-header {
+    font-family: Graphik, sans-serif;
+  }
+  .price-amount {
+    font-size: 24vw;
+    line-height: 78px;
+    margin-left: -5px;
+    white-space: nowrap;
+  }
+  .round-button {
+    width: calc(100vw - 36px);
+    height: calc(100vw - 36px);
+    display: block;
+    border-radius: 100%;
+    position: relative;
+    text-align: center;
+    line-height: 89vw !important;
+    font-size: 19px;
+  }
+  .round-button-simple:active {
+    background-color: var(--redhover);
+    color: #fff;
+    transition: 0.1s ease-in-out;
+    transform: scale(0.9);
+  }
+  .round-button-simple:active {
+    transition: 0.1s ease-in-out;
+    transform: scale(0.9) rotate(25deg);
+    color: var(--textmain);
+  }
+}
+@media screen and (min-width: 601px) {
+  .price-wrap {
+    margin-left: 40px;
+    margin-right: 40px;
+    max-width: 800px;
+    padding-bottom: var(--twoone);
+  }
+  .price-row {
+    -ms-grid-columns: 250px 1fr 90px;
+    grid-template-columns: 250px 1fr 90px;
+    height: 140px;
+  }
+  .price-header {
+    font-weight: 600;
+    font-size: 19px;
+  }
+  .price-amount,
+  .price-header {
+    font-family: Graphik, sans-serif;
+  }
+  .price-amount {
+    font-size: 103px;
+    line-height: 78px;
+    padding-right: 30px;
+    text-align: right;
+    padding-top: 4px;
+    white-space: nowrap;
+  }
+  .round-button {
+    width: 92px;
+    height: 92px;
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    text-align: center;
+    line-height: 5.3;
+    font-size: 16px;
+  }
+}
+.round-button-simple {
+  background-color: var(--bgpractice);
+  color: var(--textmain);
+  box-sizing: border-box;
+  transition: 0.1s ease-in-out;
+}
+.round-button-simple:hover {
+  background-color: var(--bgpractice);
+  color: var(--textmain);
+  transition: 0.1s ease-in-out;
+  transform: scale(1.1);
+}
+.round-button-practice {
+  background-color: var(--red);
+  color: #fff;
+  transform: rotate(-45deg);
+  transition: 0.1s ease-in-out;
+  line-height: 5.4;
+}
+.round-button-practice:active,
+.round-button-practice:hover {
+  background-color: var(--redhover);
+  transition: 0.1s ease-in-out;
+  transform: scale(1.1) rotate(25deg);
+  color: #fff;
+}
+@media screen and (max-width: 600px) {
+  .authors-pics {
+    margin-bottom: var(--onesix);
+    margin-left: var(--onesix);
+    margin-right: var(--fourty);
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: 601px) {
+  .authors-pics {
+    margin-bottom: var(--fourty);
+    margin-left: var(--fourty);
+    margin-right: var(--fourty);
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    max-width: 800px;
+  }
+}
+.author-pic {
+  width: 100%;
+}
+@-webkit-keyframes color {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: hsla(0, 0%, 100%, 0);
+  }
+  to {
+    background-color: #fff;
+  }
+}
+@keyframes color {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: hsla(0, 0%, 100%, 0);
+  }
+  to {
+    background-color: #fff;
+  }
+}
+.asterisk-shtang {
+  position: relative;
+  top: 10%;
+  left: 78.5%;
+}
+.asterisk-kapanaga {
+  position: relative;
+  top: 10%;
+  left: 64%;
+}
+.asterisk-inline {
+  display: inline-block;
+  vertical-align: baseline;
+  position: relative;
+  top: 1px;
+}
+
+.link-to-buy {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 1px;
+  border-radius: 50%;
+  mix-blend-mode: overlay;
+  -webkit-animation-name: color;
+  animation-name: color;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+
+@media screen and (max-width: 414px) {
+  .wrap-link-to-buy {
+    position: relative;
+    width: 278px;
+  }
+  .link-to-buy {
+    width: 27.3vw;
+    height: 27.3vw;
+  }
+}
+
+@media screen and (min-width: 415px) and (max-width: 699px) {
+  .wrap-link-to-buy {
+    position: relative;
+    width: 278px;
+  }
+  .link-to-buy {
+    width: 83px;
+    height: 83px;
+  }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1024px) {
+  .wrap-link-to-buy {
+    position: relative;
+    width: 278px;
+    margin: auto;
+  }
+  .link-to-buy {
+    width: 83px;
+    height: 83px;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .wrap-link-to-buy {
+    position: relative;
+    width: 400px;
+    margin: auto;
+  }
+  .link-to-buy {
+    width: 120px;
+    height: 120px;
+  }
+}
+@-webkit-keyframes color-hover {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: hsla(0, 0%, 100%, 0);
+  }
+  to {
+    background-color: #fff;
+  }
+}
+@keyframes color-hover {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: hsla(0, 0%, 100%, 0);
+  }
+  to {
+    background-color: #fff;
+  }
+}
+.link-to-buy:hover {
+  -webkit-animation-name: color;
+  animation-name: color;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+
+.del {
+	position: relative;
+    top: 1px;
+}
+
+@media screen and (max-width: 600px) {
+    .del:before {
+        content: "";
+        border-bottom: 3px solid var(--red);
+        position: absolute;
+        width: 93%;
+        height: 45%;
+        transform: rotate(10deg);
+    }
+    .del {
+        padding-top: 10px;
+    }
+}
+
+@media screen and (min-width: 601px){
+    .del:before {
+        content: "";
+        border-bottom: 3px solid var(--red);
+        position: absolute;
+        width: 370px;
+        height: 53%;
+        transform: rotate(10deg);
+    }
+    .round-button-practice {
+    /* margin-top: 35px; */
+    }
+}
+
+@media screen and (min-width: 601px) {
+      .sale {
+          text-align: right;
+      }
+      .new-price-rules {
+      padding-right: 88px;
+  }
+}
+
+.new-price {
+    display: block;
+    text-align: left;
+    color: var(--red);
+    display: inline-block;
+    padding-right: 13px;
+}
+
+.new-price-rules {
+    font-family: 'Graphik',sans-serif;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--textmain);
+    font-weight: 100;
+}
+    </style>
+
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript">
+            (function (d, w, c) {
+                (w[c] = w[c] || []).push(function () {
+                    try {
+                        w.yaCounter45353802 = new Ya.Metrika({
+                            id: 45353802,
+                            clickmap: true,
+                            trackLinks: true,
+                            accurateTrackBounce: true,
+                            webvisor: true
+                        });
+                    } catch (e) {
+                    }
+                });
+
+                var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () {
+                        n.parentNode.insertBefore(s, n);
+                    };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else {
+                    f();
+                }
+            })(document, window, "yandex_metrika_callbacks");
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/45353802" style="position:absolute; left:-9999px;" alt></div></noscript>
+        <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+    <div class="article">
+        
+    <header>
+    <div class="header-text">
+        <span class="header-tag">Онлайновый курс</span>
+        <h1>Таблицы и прочие радости</h1>
+        <p>Как понятно и красиво представить данные в виде таблицы.</p>
+    </div>
+    <div class="header-picture header-picture-promo">
+        <picture class="header-img header-img-promo">
+            <source srcset="images/0-header-pic-dark.png" media="(prefers-color-scheme: dark)">
+            <img class="header-img header-img-promo" src="images/0-header-pic-light.png">
+        </picture>
+        <div class="wrap-link-to-buy"><a class="link-to-buy" href="#buy">&nbsp;</a></div>
+    </div>
+</header>
+
+        <div class="main-text">
+            
+    <div class="aside">
+    <div>
+        <h2 class="article">Почему таблицы</h2>
+        <p>1. Никогда еще нас не окружало столько информации и никогда эта информация не была такой сложной. Таблица — один из способов упрощения сложной информации. Расписание поездов, меню ресторана, счет за коммунальные услуги, кассовый чек, содержание книги, календарь — таблицы повсюду, хоть часто мы этого и не замечаем.</p>
+        <p>2. Мы уверены, что таблицы — хорошее упражнение не только для дизайнеров. С&nbsp;их помощью можно продвинуться в верстке, редактуре, анализе данных, представлении информации. Об универсальности многих тем говорят их названия: <i>Форма</i>, <i>Сортировка и группировка</i>, <i>Выравнивание</i>, <i>Наглядность</i>.</p>
+        <p>3. У нас накопилось столько интересного материала, что было бы преступлением им не поделиться&nbsp;:–)</p>
+    </div>
+    <p class="aside" style="margin-top: 56px;">
+        <span>
+            <span class="factoid">14</span>
+            <span class="aside-header">текстовых глав</span>
+            <span class="factoid-description extra-content">Кажется, не так уж много, но если переложить это на бумагу, получится книжка примерно в 300 страниц. Знаем, потому что писали в Гугл-доке.</span>
+        <span>
+    </span></span></p>
+</div>
+  
+
+<!-- <h2 class="article">Как устроен курс</h2>
+  <p>
+    Курс состоит из 14 глав. У шести есть&nbsp;<nobr><span class="practice-item-yes-inline"></span> практические </nobr>
+    задания.
+  </p>
+  <div class="oglavlenie-wrap">
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">1</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Табличное представление</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Прежде всего разберемся, что такое таблица, чем она отличается от сплошного текста и от списка.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-yes"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">2</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Шрифт</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Выбор шрифта для таблицы — ответственная задача. Правильный шрифт упростит жизнь и дизайнеру, и читателю.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-no"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">3</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Повторы</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Повторы съедают много места и отвлекают внимание от остальных данных. К счастью, есть много способов это исправить.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-yes"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">4</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Сортировка и группировка</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Если данные стоят в случайном порядке, разобраться в них сложнее, а чтобы найти нужное значение, придется просмотреть таблицу целиком.
+    </div>
+      <div class="oglavlenie-item soon oglavlenie-item-4 practice-item-no"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">5</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Направление чтения и поиска</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Верно заданное направление помогает читателя быстрее сориентироваться и найти нужные данные.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-no"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">6</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Выравнивание</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Задача выравнивания — создать правильные связи между элементами таблицы.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-no"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">7</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Линейки и чересполосица</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Тяжелая артиллерия верстки способна решать большие проблемы, но также способна их создавать.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-yes"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">8</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Форма</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Даже идеальные содержание и структура не гарантируют таблице хорошую форму — о ней стоит подумать отдельно.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-yes"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">9</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Ритм</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Правильный ритм не только делает верстку аккуратной, но и раскрывает структуру данных.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-no"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">10</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Наглядность</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Таблица необязательно должна быть просто набором данных, она может представлять их наглядно.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-yes"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">11</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Вместо таблицы</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Как понять, что таблица не лучший вариант, и выбрать подходящий способ представления данных.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-no"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">12</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Шапка</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Шапка — это верхняя строка или несколько строк таблицы, в которых расположены заголовки колонок.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-yes"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">13</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Боковик</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Боковик находится слева от прографки и выполняет ту же функцию, что и шапка: если шапка озаглавливает колонки, то боковик — строки.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-no"></div>
+    </div>
+    <div class="oglavlenie-row">
+      <div class="oglavlenie-item oglavlenie-item-1">14</div>
+      <div class="oglavlenie-item oglavlenie-item-2">Примечания</div>
+      <div class="oglavlenie-item oglavlenie-item-3">Примечанием может быть всё, что выбивается из основной структуры таблицы. Таким «неосновным» данным стоит уделить особое внимание.</div>
+      <div class="oglavlenie-item oglavlenie-item-4 practice-item-no"></div>
+    </div>
+  </div> -->
+
+<h2 class="article">Кто это такой умный</h2>
+<div class="authors-pics">
+  <div>
+    <svg class="asterisk-shtang" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.51685 16L8.31461 8.73751L13.2809 14.0183L14.0225 13.2752L8.75281 8.29838L16 8.50106V7.49894L8.75281 7.70162L14.0225 2.71358L13.2809 1.9817L8.31461 7.26249L8.51685 0H7.48315L7.68539 7.26249L2.7191 1.9817L1.97753 2.71358L7.24719 7.70162L0 7.46517V8.50106L7.24719 8.29838L1.97753 13.2752L2.7191 14.0183L7.68539 8.73751L7.48315 16H8.51685Z" fill="var(--textmain)"/>
+    </svg>
+    <img class="author-pic" src="images/0_shtang.png" alt>
+  </div>
+  <div>
+    <svg class="asterisk-kapanaga" width="33" height="16" viewBox="0 0 33 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.51685 16L8.31461 8.73751L13.2809 14.0183L14.0225 13.2752L8.75281 8.29838L16 8.50106V7.49894L8.75281 7.70162L14.0225 2.71358L13.2809 1.9817L8.31461 7.26249L8.51685 0H7.48315L7.68539 7.26249L2.7191 1.9817L1.97753 2.71358L7.24719 7.70162L0 7.46517V8.50106L7.24719 8.29838L1.97753 13.2752L2.7191 14.0183L7.68539 8.73751L7.48315 16H8.51685Z" fill="var(--textmain)"/>
+      <path d="M25.5169 16L25.3146 8.73751L30.2809 14.0183L31.0225 13.2752L25.7528 8.29838L33 8.50106V7.49894L25.7528 7.70162L31.0225 2.71358L30.2809 1.9817L25.3146 7.26249L25.5169 0H24.4831L24.6854 7.26249L19.7191 1.9817L18.9775 2.71358L24.2472 7.70162L17 7.46517V8.50106L24.2472 8.29838L18.9775 13.2752L19.7191 14.0183L24.6854 8.73751L24.4831 16H25.5169Z" fill="var(--textmain)"/>
+    </svg>
+    <img class="author-pic" src="images/0_kapanaga.png" alt>
+  </div>
+</div>
+
+<p>
+  <svg class="asterisk-inline" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.51685 16L8.31461 8.73751L13.2809 14.0183L14.0225 13.2752L8.75281 8.29838L16 8.50106V7.49894L8.75281 7.70162L14.0225 2.71358L13.2809 1.9817L8.31461 7.26249L8.51685 0H7.48315L7.68539 7.26249L2.7191 1.9817L1.97753 2.71358L7.24719 7.70162L0 7.46517V8.50106L7.24719 8.29838L1.97753 13.2752L2.7191 14.0183L7.68539 8.73751L7.48315 16H8.51685Z" fill="var(--textmain)"/>
+  </svg>
+
+  <a class="link" href="https://www.igorshtang.ru/"><span class="podbor">Игорь Штанг</span></a> — дизайнер и преподаватель. Работал в издательской группе «Парамон» и Бюро Горбунова. Ведет курс
+  <a class="link" href="https://vk.com/typeschool">«Типографика и верстка»</a> и другие мастер-классы. Пишет о дизайне <a class="link" href="https://nobelfaik.livejournal.com/">в блоге</a>.
+</p>
+<p>
+  <svg class="asterisk-inline" width="33" height="16" viewBox="0 0 33 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.51685 16L8.31461 8.73751L13.2809 14.0183L14.0225 13.2752L8.75281 8.29838L16 8.50106V7.49894L8.75281 7.70162L14.0225 2.71358L13.2809 1.9817L8.31461 7.26249L8.51685 0H7.48315L7.68539 7.26249L2.7191 1.9817L1.97753 2.71358L7.24719 7.70162L0 7.46517V8.50106L7.24719 8.29838L1.97753 13.2752L2.7191 14.0183L7.68539 8.73751L7.48315 16H8.51685Z" fill="var(--textmain)"/>
+    <path d="M25.5169 16L25.3146 8.73751L30.2809 14.0183L31.0225 13.2752L25.7528 8.29838L33 8.50106V7.49894L25.7528 7.70162L31.0225 2.71358L30.2809 1.9817L25.3146 7.26249L25.5169 0H24.4831L24.6854 7.26249L19.7191 1.9817L18.9775 2.71358L24.2472 7.70162L17 7.46517V8.50106L24.2472 8.29838L18.9775 13.2752L19.7191 14.0183L24.6854 8.73751L24.4831 16H25.5169Z" fill="var(--textmain)"/>
+  </svg>
+  <a class="link" href="https://medium.com/@kapanaga"><span class="podbor">Михаил Капанага</span></a> — информационный и графический дизайнер. Работает в <a class="link" href="https://www.gismeteo.ru/">«Гисметео»</a>. Дизайнил приложение доставки еды <a class="link" href="https://gotovo.ru/">«Готово»</a>, тайм-трекер <a class="link" href="http://hourly-app.com/">Hourly</a>, мобильный сайт духов «Деметр», турниры по «Доте» в Cybermates и еще несколько проектов, про которые не может рассказать.
+</p>
+<!-- потерял штатив прям утром в тот день, когда надо было сфоткаться. но мы же не отчаиваемся, штатив всегда можно собрать из подручных средств: /assets/img/758783491.JPG -->
+
+<section class="section-wrap">
+    <h2 class="article">Что внутри</h2>
+    <div>
+        <p>Формат курса — лонгриды с картинками и анимацией. <a href="https://www.igorshtang.ru/course/tables/lessons/tabulation/" class="link">Первая глава</a> открыта для всех.</p>
+    </div>
+    <div class="tiles">
+        <div class="column-big border-desktop">
+          <picture>
+              <source class="img-adaptive saturate" srcset="images/0_desktop-redesign-straws-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate" src="images/0_desktop-redesign-straws.png">
+          </picture>
+        </div>
+        <div class="column-small">
+          <div class="desktop-content">
+            <picture>
+              <source class="img-adaptive saturate" srcset="images/0_mobile-redesign-alphonsine-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate" src="images/0_mobile-redesign-alphonsine.png">
+            </picture>
+          </div>
+          <div class="mobile-content">
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-redesign-slider-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-redesign-slider.png">
+            </picture>
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-redesign-heller-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-redesign-heller.png">
+            </picture>
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-redesign-alphonsine-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-redesign-alphonsine.png">
+            </picture>
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-redesign-ikea-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-redesign-ikea.png">
+            </picture>
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-redesign-steps-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-redesign-steps.png">
+            </picture>
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-redesign-timetable-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-redesign-timetable.png">
+            </picture>
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-redesign-pillbox-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-redesign-pillbox.png">
+            </picture>
+          </div>
+          <div>
+            <span class="factoid">170</span>
+            <span class="aside-header">примеров</span>
+            <span class="factoid-description extra-content">Показываем таблицы из&nbsp;разных областей дизайна, бумажные и&nbsp;электронные, от&nbsp;15&nbsp;века до&nbsp;сегодняшнего дня.</span>
+          </div>
+        </div>
+    </div>
+
+    <div class="tiles tiles-reverse">
+        <div class="column-big border-desktop">
+            <picture>
+              <source class="img-adaptive saturate" srcset="images/0_desktop-redesign-poll-dark.jpg" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate" src="images/0_desktop-redesign-poll.jpg">
+            </picture>
+        </div>
+        <div class="column-small">
+          <div class="desktop-content">
+            <picture>
+              <source class="img-adaptive saturate" srcset="images/0_mobile-redesign-heller-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate" src="images/0_mobile-redesign-heller.png">
+            </picture>
+          </div>
+          <div class="left">
+            <span class="factoid factoid-mobile-corrected">54</span>
+            <span class="aside-header">переверстки</span>
+            <span class="factoid-description extra-content">Плохие таблицы не&nbsp;только критикуем, но и&nbsp;переделываем, объясняя каждый шаг.</span>
+          </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-wrap">
+    <h2 class="article">Зачем нужна практика</h2>
+    <div>
+        <p>Практика — самый эффективный способ закрепить знания, без нее теория останется просто теорией и быстро забудется. Мы подготовили шесть заданий, которые охватывают весь материал курса, от редактуры до визуализации данных.</p>
+        <p>На каждое задание даем обратную связь: проверяем, насколько хорошо вы поняли тему, указываем на ошибки и объясняем, как их исправить. Для практики подойдет любая программа, хоть Фотошоп, хоть Эксель.</p>
+    </div>
+    
+    <div class="tiles">
+        <div class="column-big border-desktop">
+            <picture>
+              <source class="img-adaptive saturate" srcset="images/0_desktop-practice-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate" src="images/0_desktop-practice.png">
+            </picture>
+        </div>
+        <div class="column-small">
+          <div class="desktop-content">
+            <picture>
+              <source class="img-adaptive saturate" srcset="images/0_mobile-practice-review-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate" src="images/0_mobile-practice-review.png">
+            </picture>
+          </div>
+          <div class="mobile-content">
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-practice-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-practice.png">
+            </picture>
+            <picture>
+              <source class="img-adaptive saturate tiles-mobile-scroll-img" srcset="images/0_mobile-practice-review-dark.png" media="(prefers-color-scheme: dark)">
+              <img class="img-adaptive saturate tiles-mobile-scroll-img" src="images/0_mobile-practice-review.png">
+            </picture>
+          </div>
+          <div>
+            <span class="factoid">6</span>
+            <span class="aside-header">практических заданий</span>
+            <span class="factoid-description extra-content">Выполненное задание вы&nbsp;отправляете нам на&nbsp;почту. Мы комментируем ваш результат и&nbsp;показываем свой.</span>
+          </div>
+        </div>
+    </div>
+</section>
+
+<h2 class="article">На какое время доступен курс</h2>
+<p>
+    Мы даем доступ к материалам курса на один год. Практические задания принимаются в течение всего срока подписки,
+    но лучше делать их сразу после изучения темы (так интереснее).
+</p>
+
+<h2 class="article">Можно ли читать с телефона</h2>
+<p>Материал курса сложный и разнообразный, поэтому мы рекомендуем смотреть его на большом экране. Можно и на телефоне, но некоторые примеры не поместятся в ширину и их придется скролить.</p>
+  
+
+<h2 class="article">Какие правила</h2>
+<p>Курс предназначен для индивидуального изучения. Одна оплата — один пользователь. Нельзя выкладывать материалы курса в открытом доступе, это будет нарушением закона.</p>
+
+<h2 class="article" id="buy">Хочу купить</h2>
+<p>Нажимая кнопку «Купить», вы соглашаетесь с условиями <a class="link" href="https://www.igorshtang.ru/course/tables/legal/offer" target="_blank">оферты</a>. После оплаты на указанный вами электронный адрес придет письмо со ссылкой доступа. Проверьте папку «Спам».</p>
+
+<div class="aside">
+  <div class="price-wrap">
+    <div class="price-row">
+      <div class="price-item price-item-1">
+        <div class="price-header">Теория</div>
+        <div>Просто читаете курс</div>
+      </div>
+      <div class="price-item price-item-2 price-amount">5900&thinsp;₽</div>
+      <div class="price-item price-item-3">
+        <input class="round-button round-button-simple js-buy-btn" type="button" value="Купить" data-type="theory">
+      </div>
+    </div>
+    <div class="price-row">
+      <div class="price-item price-item-1">
+        <div class="price-header">Теория + практика</div>
+        <div>Читаете курс</div>
+        <div>Делаете задания</div>
+        <div>Получаете фидбэк</div>
+      </div>
+
+<!-- sale
+      <div class="price-item price-item-2 sale">
+        <span class="new-price price-header">8900 ₽</span><span class="new-price-rules price-header"> Скидка 3000 ₽ до 10 января</span>
+        <div class=" price-amount del">11900&thinsp;₽</div>
+      </div>
+      <div class="price-item price-item-3">
+        <input class="round-button round-button-practice js-buy-btn" type="button" value="Купить" data-type="practice" />
+      </div>
+-->
+
+<!-- salen't -->
+      <div class="price-item price-item-2">
+        <div class=" price-amount">11900&thinsp;₽</div>
+      </div>
+      <div class="price-item price-item-3">
+        <input class="round-button round-button-practice js-buy-btn" type="button" value="Купить" data-type="practice">
+      </div>
+<!-- salen't -->
+
+    </div>
+  </div>
+  <p class="aside" style="margin-top: -9px;">
+    <span class="aside-header">Для компаний</span>
+    <span class="factoid-description">При оплате по&nbsp;счету курс стоит 14900&nbsp;₽ за&nbsp;одного подписчика, практика включена. Напишите на&nbsp;<a href="mailto:conversive@mail.ru">conversive@mail.ru</a></span>
+  </p>
+</div>
+
+<h2 class="article">Пока нет уверенности</h2>
+<p>Тогда почитайте первую главу бесплатно ↓</p>
+
+        </div>
+    </div>
+
+    
+    
+        
+
+<footer>
+    <ol class="footer-links">
+        <a href="/course/tables/lessons/tabulation/" class="footer-item">
+            Табличное представление
+        </a><a href="/course/tables/lessons/font/" class="footer-item">
+            Шрифт
+        </a><a href="/course/tables/lessons/repetitions/" class="footer-item">
+            Повторы
+        </a><a href="/course/tables/lessons/sorting/" class="footer-item">
+            Сортировка и группировка
+        </a><a href="/course/tables/lessons/direction/" class="footer-item">
+            Направление чтения и поиска
+        </a><a href="/course/tables/lessons/alignment/" class="footer-item">
+            Выравнивание
+        </a><a href="/course/tables/lessons/lines/" class="footer-item">
+            Линейки и чересполосица
+        </a><a href="/course/tables/lessons/form/" class="footer-item">
+            Форма
+        </a><a href="/course/tables/lessons/rhythm/" class="footer-item">
+            Ритм
+        </a><a href="/course/tables/lessons/visual/" class="footer-item">
+            Наглядность
+        </a><a href="/course/tables/lessons/alternatives/" class="footer-item">
+            Вместо таблицы
+        </a><a href="/course/tables/lessons/head/" class="footer-item">
+            Шапка
+        </a><a href="/course/tables/lessons/stub/" class="footer-item">
+            Боковик
+        </a><a href="/course/tables/lessons/notes/" class="footer-item">
+            Примечания
+        </a>
+        <a class="footer-item"></a>
+    </ol>
+</footer>
+
+    
+
+    <script>
+        (()=>{const t=new class{constructor(){this.btn=document.querySelectorAll(".js-buy-btn")}post(t){return fetch("/lesson/api/payment",{method:"POST",headers:{"Content-Type":"application/json;charset=utf-8"},body:JSON.stringify({type:t})}).then(t=>t.json())}init(){this.btn&&this.btn.forEach(s=>{s.addEventListener("click",()=>{if(s.classList.contains("disabled"))return!1;s.classList.add("disabled");var t=s.getAttribute("data-type");s&&["theory","practice"].includes(t)&&this.post(t).then(t=>{if(t.data.form){s.insertAdjacentHTML("afterend",t.data.form);const e=s.parentNode.querySelector('form[method="post"]');e.submit(),s.classList.remove("disabled"),e.remove()}}).catch(t=>{console.error(t),s.classList.remove("disabled")})})})}};t.init()})();
+    </script>
+    
+    <script>
+        
+    </script>
+
+    <section class="copyright" style="padding-top: 16px;">
+    <ul>
+        <li><a href="/course/tables/legal/offer/" target="_blank">Оферта</a></li>
+        <li><a href="/course/tables/legal/payment-and-refund/" target="_blank">Оплата и возврат</a></li>
+        <li>ИП Штанг Игорь Владимирович</li>
+        <li>ИНН 744915095828</li>
+        <li><a href="mailto:conversive@mail.ru">conversive@mail.ru</a></li>
+        <li><a href="https://modulbank.ru/" target="_blank"><img src="fonts/0_logos.svg" alt></a></li>
+    </ul>
+</section>
+
+</body>
+</html>
