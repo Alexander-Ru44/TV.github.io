@@ -9,9 +9,10 @@
 
 <programme start="20010101010000 +0300" stop="21011231235959 +0300" channel="001">
 <title lang="ru">Информация</title>
-<desc lang="ru">Автор плейлиста Alexander-Ru44</desc>
+<desc lang="ru">Автор плейлиста Alexander-Ru44 
+  Тема на GitHub https://github.com/Alexander-Ru44/TV.github.io</desc>
 <icon src=""/>
-<date>1999</date>
+<date></date>
 <category lang="ru">Информация</category> </programme>
 
 </tv>
