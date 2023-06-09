@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+<tv generator-info-name="manual">
+  <channel id="001">
+     <display-name lang="ru">Об IPTV</display-name>
+     <display-name lang="ru">985</display-name>
+     <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
+  </channel>
+
+<programme start="20010101010000 +0300" stop="21011231235959 +0300" channel="001">
+<title lang="ru">Информация</title>
+<desc lang="ru">Автор плейлиста Alexander-Ru44</desc>
+<icon src=""/>
+<date>1999</date>
+<category lang="ru">Информация</category> </programme>
+
+</tv>
