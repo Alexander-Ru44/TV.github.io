@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tv SYSTEM "xmltv.dtd">
 <tv generator-info-name="manual">
+
   #Информация о канале 
   <channel id="001">
      <display-name lang="ru">Об IPTV</display-name>
