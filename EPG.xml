@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tv SYSTEM "xmltv.dtd">
 <tv generator-info-name="manual">
-
-  #Информацию о канале#
+  
+    #Информацию о канале#
   <channel id="001">
      <display-name lang="ru">Об IPTV</display-name>
      <display-name lang="ru">985</display-name>
      <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
   </channel>
   
-    <channel id="002">
-     <display-name lang="ru">Последние обновления плейлиста</display-name>
-     <display-name lang="ru">985</display-name>
-     <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
-  </channel>
-
-  #Телепрограмма#
+  
+    #Телепрограмма#
 <programme start="20010101010000 +0300" stop="21011231235959 +0300" channel="001">
 <title lang="ru">Информация</title>
 <desc lang="ru">Автор плейлиста Alexander-Ru44 
@@ -24,11 +19,5 @@
 <date></date>
 <category lang="ru">Информация</category> </programme>
 
-<programme start="20010101010000 +0300" stop="21011231235959 +0300" channel="002">
-<title lang="ru">19.07.2023</title>
-<desc lang="ru">Последние обновления плейлиста 19.07.2023</desc>
-<icon src=""/>
-<date></date>
-<category lang="ru">Информация</category> </programme>
 
 </tv>
