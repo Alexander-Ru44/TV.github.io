@@ -15,12 +15,6 @@
      <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
   </channel>
   
-  
-    <channel id="003">
-     <display-name lang="ru">Первый HD</display-name>
-     <display-name lang="ru">985</display-name>
-     <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
-  </channel>
 
   #Телепрограмма#
 <programme start="20010101010000 +0300" stop="21011231235959 +0300" channel="001">
