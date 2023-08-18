@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+<tv generator-info-name="manual">
+  
+    #Информацию о канале#
+  <channel id="001">
+     <display-name lang="ru"></display-name>
+     <display-name lang="ru">985</display-name>
+     <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
+  </channel>
+
+</tv>
