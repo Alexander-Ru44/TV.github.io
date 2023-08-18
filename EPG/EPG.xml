@@ -3,13 +3,7 @@
 <tv generator-info-name="manual">
 
   #Информацию о канале#
-  <channel id="001">
-     <display-name lang="ru">Об IPTV</display-name>
-     <display-name lang="ru">985</display-name>
-     <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
-  </channel>
-  
-    <channel id="002">
+    <channel id="001">
      <display-name lang="ru">Последние обновления плейлиста</display-name>
      <display-name lang="ru">985</display-name>
      <icon src="https://cdn-icons-png.flaticon.com/512/25/25231.png"/>
@@ -17,15 +11,7 @@
   
 
   #Телепрограмма#
-<programme start="20010101010000 +0300" stop="21011231235959 +0300" channel="001">
-<title lang="ru">Информация</title>
-<desc lang="ru">Автор плейлиста Alexander-Ru44 
-  Тема на GitHub https://github.com/Alexander-Ru44/TV.github.io</desc>
-<icon src=""/>
-<date></date>
-<category lang="ru">Информация</category> </programme>
-
-<programme start="20010101010000 +0300" stop="21011231235959 +0300" channel="002">
+<programme start="20230818010000 +0300" stop="21011231235959 +0300" channel="001">
 <title lang="ru">18.08.2023</title>
 <desc lang="ru"></desc>
 <icon src=""/>
