@@ -1,7 +1,7 @@
 {
   "name": "PeerTube",
-  "description": "Плагин, добавляющий PeerTube в качестве источника.",
-  "author": "FUTO",
+  "description": "Плагин, добавляющий Rutube в качестве источника.",
+  "author": "Sanya",
   "authorUrl": "https://futo.org",
   "sourceUrl": "https://plugins.grayjay.app/PeerTube/PeerTubeConfig.json",
   "repositoryUrl": "https://futo.org",
@@ -19,6 +19,6 @@
     "everywhere"
   ],
   "constants": {
-    "baseUrl": "https://peertube.futo.org"
+    "baseUrl": "https://rutube.ru/"
   }
 }
