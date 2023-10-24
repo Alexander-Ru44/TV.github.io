@@ -15,12 +15,6 @@
      <icon src="https://raw.githubusercontent.com/AlexanderRU44/TV.github.io/main/ICONS/logo.png"/>
   </channel>
   
-      <channel id="003">
-     <display-name lang="ru">Обновление:24.10.2023</display-name>
-     <display-name lang="ru">985</display-name>
-     <icon src="https://raw.githubusercontent.com/AlexanderRU44/TV.github.io/main/ICONS/logo.png"/>
-  </channel>
-
   #Телепрограмма#
 <programme start="20230901010100 +0000" stop="20250920010100 +0000" channel="001">
 <title lang="ru">Telegram канал @iptv_russia_ru</title>
@@ -33,15 +27,6 @@
 <title lang="ru">19.10.2023</title>
 <desc lang="ru"></desc>
 <icon src="https://raw.githubusercontent.com/AlexanderRU44/TV.github.io/main/ICONS/qr-code.png"/>
-<date></date>
-<category lang="ru">Информация</category> </programme>
-
-<programme start="20230901010100 +0000" stop="20250920010100 +0000" channel="003">
-<title lang="ru">24.10.2023
-
-Android TV+Free TV Чат</title>
-<desc lang="ru"></desc>
-<icon src="https://raw.githubusercontent.com/AlexanderRU44/TV.github.io/main/ICONS/111.png"/>
 <date></date>
 <category lang="ru">Информация</category> </programme>
 
