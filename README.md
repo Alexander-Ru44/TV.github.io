@@ -1,1 +1,1 @@
-EPG IPTV Russian 
+Icons EPG IPTV Russian 
